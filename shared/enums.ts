@@ -1,0 +1,121 @@
+export const enum Expansion {
+    Classic = 0,
+    TBC = 1,
+    WotLK = 2,
+}
+
+export const enum Locale {
+    enUS = 0,
+    koKR = 1,
+    frFR = 2,
+    deDE = 3,
+    zhCN = 4,
+    zhTW = 5,
+    esES = 6,
+    esMX = 7,
+    ruRU = 8,
+}
+
+export const enum Race {
+    Human = 1,
+    Orc = 2,
+    Dwarf = 3,
+    NightElf = 4,
+    Undead = 5,
+    Tauren = 6,
+    Gnome = 7,
+    Troll = 8,
+    Goblin = 9,
+    BloodElf = 10,
+    Draenei = 11,
+    FelOrc = 12,
+    Naga = 13,
+    Broken = 14,
+    Skeleton = 15,
+    Vrykul = 16,
+    Tuskarr = 17,
+    ForestTroll = 18,
+    Taunka = 19,
+    NorthrendSkeleton = 20,
+    IceTroll = 21
+}
+
+export const enum RealmIcon {
+    Normal = 0,
+    PvP = 1,
+    PVE = 4,
+    RP = 6,
+    RPPvP = 8
+}
+
+export const enum RealmTimezone {
+    US = 2,
+    LatinAmerica = 4,
+    Korea = 6,
+    English = 8,
+    German = 9,
+    French = 10,
+    Spanish = 11,
+    Russian = 12,
+    Taiwan = 14,
+    China = 16
+}
+
+export const enum Gender {
+    Male = 0,
+    Female = 1
+}
+
+export const enum CharClass {
+    Warrior = 1,
+    Paladin = 2,
+    Hunter = 3,
+    Rogue = 4,
+    Priest = 5,
+    DeathKnight = 6,
+    Shaman = 7,
+    Mage = 8,
+    Warlock = 9,
+    Druid = 11
+}
+
+export const CharClassKeyMap: Map<CharClass, string> = new Map([
+    [CharClass.Warrior, "warrior"],
+    [CharClass.Paladin, "paladin"],
+    [CharClass.Hunter, "hunter"],
+    [CharClass.Rogue, "rogue"],
+    [CharClass.Priest, "priest"],
+    [CharClass.DeathKnight, "deathknight"],
+    [CharClass.Shaman, "shaman"],
+    [CharClass.Mage, "mage"],
+    [CharClass.Warlock, "warlock"],
+    [CharClass.Druid, "druid"],
+])
+
+export const RaceKeyMap: Map<Race, string> = new Map([
+    [Race.Human, "human"],
+    [Race.Orc, "orc"],
+    [Race.Dwarf, "dwarf"],
+    [Race.NightElf, "nightelf"],
+    [Race.Undead, "undead"],
+    [Race.Tauren, "tauren"],
+    [Race.Gnome, "gnome"],
+    [Race.Troll, "troll"],
+    [Race.Goblin, "goblin"],
+    [Race.BloodElf, "bloodelf"],
+    [Race.Draenei, "draenei"],
+    [Race.FelOrc, "felorc"],
+])
+
+export const GenderKeyMap: Map<Gender, string> = new Map([
+    [Gender.Male, "male"],
+    [Gender.Female, "female"]
+])
+
+export function getRaceIcon(race: Race, gender: Gender): string {
+    return `https://warcraft.wiki.gg/images/Charactercreate-races_${RaceKeyMap.get(race)}-${GenderKeyMap.get(gender)}.png?format=original`
+}
+
+export function getCharClassIcon(charClass: CharClass): string {
+    return `https://warcraft.wiki.gg/images/Charactercreate-class_${CharClassKeyMap.get(charClass)}.png?format=original`
+}
