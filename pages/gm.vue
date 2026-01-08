@@ -1,11 +1,26 @@
 <template>
-  <v-sheet class="pa-12" color="grey-lighten-3">
-    <v-card class="mx-auto" max-width="400">
-      <v-card-text>
-        GM账号请联系管理员创建。
-      </v-card-text>
-    </v-card>
-  </v-sheet>
+  <v-navigation-drawer class="bg-gray" theme="dark" permanent>
+    <v-list color="transparent">
+      <v-list-item>
+        <v-btn color="primary" width="100%">创建用户</v-btn>
+      </v-list-item>
+      <v-list-item>
+        <v-btn color="error" width="100%">创建用户</v-btn>
+      </v-list-item>
+      <v-list-item>
+        <v-btn color="success" width="100%">创建用户</v-btn>
+      </v-list-item>
+    </v-list>
+
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn block>
+          Logout
+        </v-btn>
+      </div>
+    </template>
+  </v-navigation-drawer>
+  <v-main style="height: 400px"></v-main>
 </template>
 <script setup>
 import { useUserStore } from "~/store/client_auth"

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   compatibilityDate: '2025-12-31',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   runtimeConfig: {
     authDbUri: '',
     charactersDbUri: '',

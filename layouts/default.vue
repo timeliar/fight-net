@@ -1,7 +1,7 @@
 <template>
-    <v-app theme="light">
+    <v-layout theme="light">
         <!-- APP BAR -->
-        <v-app-bar app elevation="5" color="blue-darken-4" dark>
+        <v-app-bar color="blue-darken-4" dark>
             <v-app-bar-nav-icon icon="mdi-axe-battle" to="/" />
             <v-app-bar-title>Fight.net</v-app-bar-title>
             <v-btn to="/login" v-if="!userStore.isLoggedIn">
@@ -21,8 +21,7 @@
 
                 <v-card min-width="300">
                     <v-list>
-                        <v-list-item
-                            prepend-avatar="https://upload.wikimedia.org/wikipedia/commons/e/eb/WoW_icon.svg"
+                        <v-list-item prepend-avatar="https://upload.wikimedia.org/wikipedia/commons/e/eb/WoW_icon.svg"
                             :subtitle="userStore.getUserInfo?.email || '（未设置邮箱）'"
                             :title="userStore.getUserInfo?.username">
                             <template v-slot:append>
@@ -72,12 +71,8 @@
             </v-menu>
         </v-app-bar>
         <!-- Main -->
-        <v-main class="bg-grey-lighten-3">
-            <v-container fluid class="h-full">
-                <slot />
-            </v-container>
-        </v-main>
-    </v-app>
+        <slot />
+    </v-layout>
 </template>
 <script setup lang="ts">
 import { useUserStore } from "~/store/client_auth"
