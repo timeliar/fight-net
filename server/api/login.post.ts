@@ -1,5 +1,5 @@
 import { account } from '../db/schema';
-import { authDb } from '../utils/auth_db';
+import { authDb } from '../db/connections';
 import { eq } from 'drizzle-orm';
 import { calculateSRP6Verifier } from "../utils/password";
 import { loginAccount } from '@/shared/validation';

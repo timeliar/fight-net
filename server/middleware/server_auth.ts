@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { account } from '../db/schema';
-import { authDb } from '../utils/auth_db';
+import { authDb } from '../db/connections';
 import { eq } from 'drizzle-orm';
 const ignoreUrls = ['/api/login', '/api/register'];
 export default defineEventHandler(async (event) => {

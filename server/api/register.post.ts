@@ -1,6 +1,6 @@
 const config = useRuntimeConfig();
 import { account } from '../db/schema';
-import { authDb } from '../utils/auth_db';
+import { authDb } from '../db/connections';
 import { eq } from 'drizzle-orm';
 import { getRegistrationData } from "../utils/password";
 import { success, failure } from '../utils/base_response';

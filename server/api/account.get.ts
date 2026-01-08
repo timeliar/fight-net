@@ -1,4 +1,5 @@
 import { account } from "../db/schema";
+import { authDb } from "../db/connections";
 import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {

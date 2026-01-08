@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     authDbUri: '',
     charactersDbUri: '',
+    worldDbUri: '',
     soapServerPath: '',
     soapUser: '',
     soapPassword: '',

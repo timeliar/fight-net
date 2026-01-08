@@ -1,4 +1,5 @@
 import { mysqlTable, text, int, tinyint, serial, timestamp, float } from 'drizzle-orm/mysql-core';
+import { string } from 'zod';
 
 export const account = mysqlTable('account', {
     id: serial().primaryKey(),
@@ -130,3 +131,17 @@ export const characters = mysqlTable('characters', {
     innTriggerId: int().notNull(),
     extraBonusTalentCount: int().notNull().default(0),
 });
+
+export const itemTemplate = mysqlTable('item_template', {
+    entry: int().notNull().primaryKey(),
+    class: int().notNull(),
+    subclass: int().notNull(),
+    name: text().notNull(),
+    Quality: tinyint().notNull(),
+})
+
+export const itemTemplateLocale = mysqlTable('item_template_locale', {
+    ID: int().notNull().primaryKey(),
+    locale: text().notNull(),
+    name: text().notNull(),
+})

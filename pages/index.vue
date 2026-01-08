@@ -79,45 +79,66 @@
   <v-dialog v-model="realmCharactersDialog" width="auto">
     <v-card prepend-icon="mdi-card-account-details-outline" title="角色">
       <v-card-text>
-        <v-list>
-          <template v-for="(char, index) in realmCharacters" :key="index">
-            <v-list-item>
-              <template v-slot:prepend>
+        <v-data-iterator :items="realmCharacters" item-value="name">
+          <template v-slot:default="{ items, isExpanded, toggleExpand }">
+            <v-card v-for="item in items" :key="item.raw.name" max-width="500" class="mb-2">
+              <v-card-title class="d-flex align-center">
+                <v-icon :color="item.raw.color" :icon="item.raw.icon" size="18" start></v-icon>
                 <v-avatar color="grey" class="mr-2">
-                  <v-img :src="getCharClassIcon(char.class)" cover></v-img>
+                  <v-img :src="getCharClassIcon(item.raw.class)" cover></v-img>
                 </v-avatar>
                 <v-avatar color="grey">
-                  <v-img :src="getRaceIcon(char.race, char.gender)" cover></v-img>
+                  <v-img :src="getRaceIcon(item.raw.race, item.raw.gender)" cover></v-img>
                 </v-avatar>
-              </template>
-              <div min-width="500">
-                <v-list-item-title>
-                  <v-btn :color="char.online ? 'green' : 'grey'" size="small" rounded
-                    :prepend-icon="char.online ? 'mdi-wifi' : 'mdi-wifi-off'">
-                    {{ char.name }}
-                  </v-btn>
-                </v-list-item-title>
-                <v-list-item-subtitle class="mt-1">
-                  <v-chip size="x-small" color="blue">
-                    Lv.{{ char.level }}
-                  </v-chip>
-                  <v-chip size="x-small" :color="char.playerFlags & 16 ? 'grey' : 'green'">
-                    {{ char.playerFlags & 16 ? '死了' : '活着' }}
-                  </v-chip>
-                </v-list-item-subtitle>
-              </div>
-              <template v-slot:append>
-                <div class="ml-4">
-                  <p class="text-subtitle-2">在线时长：{{ char.totaltime }}秒</p>
-                  <p class="text-subtitle-2">下线时间：
-                    {{ new Date(char.logout_time * 1000 || '').toLocaleString() || '未知' }}
-                  </p>
+                <v-btn :color="item.raw.online ? 'green' : 'grey'" class="ml-3"
+                  :prepend-icon="item.raw.online ? 'mdi-wifi' : 'mdi-wifi-off'">
+                  {{ item.raw.name }}
+                </v-btn>
+                <v-chip size="small" color="blue" class="ml-3">
+                  Lv.{{ item.raw.level }}
+                </v-chip>
+                <v-chip size="small" :color="item.raw.playerFlags & 16 ? 'grey' : 'green'" class="ml-3">
+                  {{ item.raw.playerFlags & 16 ? '死了' : '活着' }}
+                </v-chip>
+              </v-card-title>
+
+              <v-card-text>
+                <v-list>
+                  <v-list-item>升到下一级所需经验：{{ item.raw.xp }}</v-list-item>
+                  <v-list-item>金钱：
+                    <v-chip size="small" color="yellow-accent-4" variant="flat">{{ item.raw.money.gold }}金</v-chip>
+                    <v-chip size="small" class="ml-1" color="blue-grey-lighten-2" variant="flat">{{ item.raw.money.silver }}银</v-chip>
+                    <v-chip size="small" class="ml-1" color="brown-darken-1" variant="flat">{{ item.raw.money.copper }}铜</v-chip>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn size="small" prepend-icon="mdi-tshirt-crew"
+                  :append-icon="`${isExpanded(item) ? 'mdi-arrow-up' : 'mdi-arrow-down'}`"
+                  :model-value="isExpanded(item)" @click="() => loadCharacterEquipments(item, toggleExpand)">
+                  角色装备
+                </v-btn>
+              </v-card-actions>
+
+              <v-divider></v-divider>
+
+              <v-expand-transition>
+                <div v-if="isExpanded(item)">
+                  <v-list :lines="false" density="compact">
+                    <v-list-item v-for="(equipment, idx) in item.equipments" :key="idx">
+                      <v-btn>{{ ItemEquipmentPosition.get(equipment.index) }}</v-btn>
+                      <v-chip class="ml-2" :color="ItemQualityColorMap.get(equipment.quality)" variant="flat">
+                        {{ equipment.zhCNName }}
+                      </v-chip>
+                    </v-list-item>
+                  </v-list>
                 </div>
-              </template>
-            </v-list-item>
-            <v-divider></v-divider>
+              </v-expand-transition>
+            </v-card>
           </template>
-        </v-list>
+        </v-data-iterator>
       </v-card-text>
       <template v-slot:actions>
         <v-btn class="ms-auto" text="关闭" color="red" @click="realmCharactersDialog = false"></v-btn>
@@ -155,7 +176,7 @@ onMounted(async () => {
     return navigateTo('/login')
   }
 })
-import { Gender, Expansion, Locale, CharClass, Race, getCharClassIcon, getRaceIcon, RealmIcon, RealmTimezone } from "~/shared/enums"
+import { Gender, Expansion, Locale, CharClass, Race, getCharClassIcon, getRaceIcon, RealmIcon, RealmTimezone, ItemQualityColorMap, ItemEquipmentPosition } from "~/shared/enums"
 import axios from 'axios';
 const realms = ref([])
 axios.get('/api/realmlist').then((response) => {
@@ -184,6 +205,13 @@ function showRealmRates(rates: object) {
     { title: `传奇掉落：x${rates.itemLenendary}`, icon: "mdi-laptop" },
   ]
   realmRatesDialog.value = true
+}
+
+function loadCharacterEquipments(character: any, toggleExpand: Function) {
+  axios.get(`/api/character/${character.raw.guid}/equipments`).then((response) => {
+    character.equipments = response.data.result.equipments
+    toggleExpand(character)
+  })
 }
 </script>
 <style scoped lang="scss"></style>

@@ -1,5 +1,5 @@
 import { realmlist, realmcharacters } from '../db/schema';
-import { authDb } from '../utils/auth_db';
+import { authDb } from '../db/connections';
 const config = useRuntimeConfig();
 import { eq, and } from 'drizzle-orm';
 export default defineEventHandler(async (event) => {

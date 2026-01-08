@@ -13,3 +13,9 @@ export const charactersDb = drizzle({
         uri: config.charactersDbUri
     }
 });
+
+export const worldDb = drizzle({
+    connection: {
+        uri: config.worldDbUri
+    }
+});
