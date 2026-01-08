@@ -80,7 +80,7 @@ import { Expansion, Locale } from "~/shared/enums"
 const userStore = useUserStore()
 async function logout() {
     userStore.logout()
-    await navigateTo('/')
+    await navigateTo('/login')
 }
 </script>
 <style scoped lang="scss"></style>

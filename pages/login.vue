@@ -1,22 +1,24 @@
 <template>
-    <v-sheet class="pa-12" color="grey-lighten-3">
-        <v-card class="mx-auto" max-width="400">
-            <v-card-text>
-                <v-form validate-on="submit lazy" @submit.prevent="submit">
-                    <v-text-field density="compact" placeholder="Login account" prepend-inner-icon="mdi-account"
-                        variant="outlined" v-model="username" :readonly="loading" :error-messages="usernameError"
-                        label="账号"></v-text-field>
-                    <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-                        :type="visible ? 'text' : 'password'" density="compact" placeholder="Enter your password"
-                        prepend-inner-icon="mdi-lock-outline" variant="outlined" :error-messages="passwordError"
-                        @click:append-inner="visible = !visible" v-model="password" :readonly="loading"
-                        label="密码"></v-text-field>
-                    <v-btn :loading="loading" class="mb-8" color="blue" size="large" variant="elevated" text="登录"
-                        type="submit" block></v-btn>
-                </v-form>
-            </v-card-text>
-        </v-card>
-    </v-sheet>
+    <v-main>
+        <v-sheet class="pa-12">
+            <v-card class="mx-auto" max-width="400">
+                <v-card-text>
+                    <v-form validate-on="submit lazy" @submit.prevent="submit">
+                        <v-text-field density="compact" placeholder="Login account" prepend-inner-icon="mdi-account"
+                            variant="outlined" v-model="username" :readonly="loading" :error-messages="usernameError"
+                            label="账号"></v-text-field>
+                        <v-text-field :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                            :type="visible ? 'text' : 'password'" density="compact" placeholder="Enter your password"
+                            prepend-inner-icon="mdi-lock-outline" variant="outlined" :error-messages="passwordError"
+                            @click:append-inner="visible = !visible" v-model="password" :readonly="loading"
+                            label="密码"></v-text-field>
+                        <v-btn :loading="loading" class="mb-8" color="blue" size="large" variant="elevated" text="登录"
+                            type="submit" block></v-btn>
+                    </v-form>
+                </v-card-text>
+            </v-card>
+        </v-sheet>
+    </v-main>
     <v-dialog v-model="dialog" transition="dialog-top-transition" width="auto">
         <v-card>
             <v-card-text>

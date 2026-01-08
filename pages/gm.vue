@@ -2,20 +2,20 @@
   <v-navigation-drawer class="bg-gray" theme="dark" permanent>
     <v-list color="transparent">
       <v-list-item>
-        <v-btn color="primary" width="100%">创建用户</v-btn>
+        <v-btn color="primary" block>创建用户</v-btn>
       </v-list-item>
       <v-list-item>
-        <v-btn color="error" width="100%">创建用户</v-btn>
+        <v-btn color="error" block>创建用户</v-btn>
       </v-list-item>
       <v-list-item>
-        <v-btn color="success" width="100%">创建用户</v-btn>
+        <v-btn color="success" block>创建用户</v-btn>
       </v-list-item>
     </v-list>
 
     <template v-slot:append>
       <div class="pa-2">
         <v-btn block>
-          Logout
+          关闭服务器
         </v-btn>
       </div>
     </template>
