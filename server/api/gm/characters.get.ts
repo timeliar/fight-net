@@ -3,7 +3,7 @@ import { realmlist, characters } from '../../db/schema';
 import { authDb, charactersDb } from '../../db/connections';
 import { parseMoney } from '@/shared/formats';
 
-import { eq, and, count, gt, like } from 'drizzle-orm';
+import { eq, and, count, gt, like, asc, desc } from 'drizzle-orm';
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     console.log(JSON.stringify(query));
@@ -23,6 +23,13 @@ export default defineEventHandler(async (event) => {
     if (totalCount <= 0) {
         return success({ characters: [], total: 0 });
     }
+    const orderBy = [];
+    if (query.levelAsc == 'true') {
+        orderBy.push(asc(characters.level));
+    } else {
+        orderBy.push(desc(characters.level));
+    }
+    orderBy.push(asc(characters.guid));
     const characterList = await charactersDb.select({
         guid: characters.guid,
         name: characters.name,
@@ -36,7 +43,7 @@ export default defineEventHandler(async (event) => {
         online: characters.online,
         health: characters.health
     })
-        .from(characters).where(and(...andCondition)).orderBy(characters.guid).limit(limit).offset(offset);
+        .from(characters).where(and(...andCondition)).orderBy(...orderBy).limit(limit).offset(offset);
 
     const resCharList = [];
     for (let i in characterList) {

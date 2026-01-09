@@ -13,6 +13,10 @@
                 <v-switch label="是否在线" v-model="onlineStat" color="primary"
                   @update:model-value="loadCharacters"></v-switch>
               </v-col>
+              <v-col cols="12" lg="3" md="6" sm="12">
+                <v-switch label="等级升序" v-model="levelAsc" color="primary"
+                  @update:model-value="loadCharacters"></v-switch>
+              </v-col>
             </v-row>
           </v-card-text>
         </v-card>
@@ -123,6 +127,7 @@ const pageCount = ref(0)
 const currentPage = ref(1)
 const nameQuery = ref('')
 const onlineStat = ref(true)
+const levelAsc = ref(true)
 const sendItemsDialog = ref(false)
 const sendItemTarget = ref({
   characterName: '',
@@ -146,7 +151,8 @@ function loadCharacters() {
       page: currentPage.value,
       size: pageSize.value,
       nameQuery: nameQuery.value,
-      online: onlineStat.value
+      online: onlineStat.value,
+      levelAsc: levelAsc.value
     }
   }).then((response) => {
     const charactersResp = response.data.result.characters;
