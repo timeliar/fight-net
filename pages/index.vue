@@ -99,7 +99,7 @@
                     <v-avatar color="grey" class="ml-2">
                       <v-img :src="getRaceIcon(character?.race, character?.gender)" cover></v-img>
                     </v-avatar>
-                    <v-btn :color="character?.online ? 'green' : 'grey'" class="ml-3"
+                    <v-btn :color="character?.online ? 'green' : 'grey'" class="ml-3 text-none"
                       :prepend-icon="character?.online ? 'mdi-wifi' : 'mdi-wifi-off'">
                       {{ character?.name }}
                     </v-btn>
