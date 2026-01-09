@@ -32,6 +32,9 @@ importers:
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(mysql2@3.16.0)
+      fast-xml-parser:
+        specifier: ^5.3.3
+        version: 5.3.3
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
@@ -43,7 +46,7 @@ importers:
         version: 3.16.0
       nuxt:
         specifier: ^4.2.2
-        version: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2)
+        version: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2)
       nuxt-auth-utils:
         specifier: ^0.5.26
         version: 0.5.26(bcrypt@6.0.0)(magicast@0.5.1)
@@ -2236,6 +2239,10 @@ packages:
   fast-npm-meta@0.4.7:
     resolution: {integrity: sha512-aZU3i3eRcSb2NCq8i6N6IlyiTyF6vqAqzBGl2NBF6ngNx/GIqfYbkLDIKZ4z4P0o/RmtsFnVqHwdrSm13o4tnQ==}
 
+  fast-xml-parser@5.3.3:
+    resolution: {integrity: sha512-2O3dkPAAC6JavuMm8+4+pgTk+5hoAs+CjZ+sWcQLkX9+/tHRuTkQh/Oaifr8qDmZ8iEHb771Ea6G8CdwkrgvYA==}
+    hasBin: true
+
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
 
@@ -3463,6 +3470,9 @@ packages:
   strip-literal@3.1.0:
     resolution: {integrity: sha512-8r3mkIM/2+PpjHoOtiAW8Rg3jJLHaV7xPwG+YRGrv6FP0wwk/toTpATxWYOW0BKdWwl82VT2tFYi5DlROa0Mxg==}
 
+  strnum@2.1.2:
+    resolution: {integrity: sha512-l63NF9y/cLROq/yqKXSLtcMeeyOfnSQlfMSlzFt/K73oIaD8DGaQWd7Z34X9GPiKqP5rbSh84Hl4bOlLcjiSrQ==}
+
   structured-clone-es@1.0.0:
     resolution: {integrity: sha512-FL8EeKFFyNQv5cMnXI31CIMCsFarSVI2bF0U0ImeNE3g/F1IvJQyqzOXxPBRXiwQfyBTlbNe88jh1jFW0O/jiQ==}
 
@@ -3888,6 +3898,14 @@ packages:
   wsl-utils@0.1.0:
     resolution: {integrity: sha512-h3Fbisa2nKGPxCpm89Hk33lBLsnaGBvctQopaBSOW/uIs6FTe1ATyAnKFJrzVs9vpGdsTe73WF3V4lIsk4Gacw==}
     engines: {node: '>=18'}
+
+  xml2js@0.6.2:
+    resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
+    engines: {node: '>=4.0.0'}
+
+  xmlbuilder@11.0.1:
+    resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
+    engines: {node: '>=4.0'}
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -4613,7 +4631,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/nitro-server@4.2.2(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2))':
+  '@nuxt/nitro-server@4.2.2(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2))(xml2js@0.6.2)':
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/kit': 4.2.2(magicast@0.5.1)
@@ -4630,8 +4648,8 @@ snapshots:
       impound: 1.0.0
       klona: 2.0.6
       mocked-exports: 0.1.1
-      nitropack: 2.12.9(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0)
-      nuxt: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2)
+      nitropack: 2.12.9(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0)(xml2js@0.6.2)
+      nuxt: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2)
       pathe: 2.0.3
       pkg-types: 2.3.0
       radix3: 1.1.2
@@ -4702,7 +4720,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/vite-builder@4.2.2(@types/node@25.0.3)(magicast@0.5.1)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2))(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vue@3.5.26)(yaml@2.8.2)':
+  '@nuxt/vite-builder@4.2.2(@types/node@25.0.3)(magicast@0.5.1)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2))(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vue@3.5.26)(yaml@2.8.2)':
     dependencies:
       '@nuxt/kit': 4.2.2(magicast@0.5.1)
       '@rollup/plugin-replace': 6.0.3(rollup@4.54.0)
@@ -4722,7 +4740,7 @@ snapshots:
       magic-string: 0.30.21
       mlly: 1.8.0
       mocked-exports: 0.1.1
-      nuxt: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2)
+      nuxt: 4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2)
       pathe: 2.0.3
       pkg-types: 2.3.0
       postcss: 8.5.6
@@ -6000,6 +6018,10 @@ snapshots:
 
   fast-npm-meta@0.4.7: {}
 
+  fast-xml-parser@5.3.3:
+    dependencies:
+      strnum: 2.1.2
+
   fastq@1.20.1:
     dependencies:
       reusify: 1.1.0
@@ -6518,7 +6540,7 @@ snapshots:
 
   nanotar@0.2.0: {}
 
-  nitropack@2.12.9(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0):
+  nitropack@2.12.9(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0)(xml2js@0.6.2):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.1
       '@rollup/plugin-alias': 5.1.1(rollup@4.54.0)
@@ -6590,6 +6612,8 @@ snapshots:
       unwasm: 0.3.11
       youch: 4.1.0-beta.13
       youch-core: 0.3.3
+    optionalDependencies:
+      xml2js: 0.6.2
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -6675,16 +6699,16 @@ snapshots:
       - bcrypt
       - magicast
 
-  nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2):
+  nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2):
     dependencies:
       '@dxup/nuxt': 0.2.2(magicast@0.5.1)
       '@nuxt/cli': 3.31.3(cac@6.7.14)(magicast@0.5.1)
       '@nuxt/devtools': 3.1.1(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(vue@3.5.26)
       '@nuxt/kit': 4.2.2(magicast@0.5.1)
-      '@nuxt/nitro-server': 4.2.2(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2))
+      '@nuxt/nitro-server': 4.2.2(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2))(xml2js@0.6.2)
       '@nuxt/schema': 4.2.2
       '@nuxt/telemetry': 2.6.6(magicast@0.5.1)
-      '@nuxt/vite-builder': 4.2.2(@types/node@25.0.3)(magicast@0.5.1)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(yaml@2.8.2))(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vue@3.5.26)(yaml@2.8.2)
+      '@nuxt/vite-builder': 4.2.2(@types/node@25.0.3)(magicast@0.5.1)(nuxt@4.2.2(@parcel/watcher@2.5.1)(@types/node@25.0.3)(@vue/compiler-sfc@3.5.26)(cac@6.7.14)(db0@0.3.4(drizzle-orm@0.45.1(mysql2@3.16.0))(mysql2@3.16.0))(drizzle-orm@0.45.1(mysql2@3.16.0))(ioredis@5.8.2)(magicast@0.5.1)(mysql2@3.16.0)(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(sass@1.97.1)(terser@5.44.1)(yaml@2.8.2))(xml2js@0.6.2)(yaml@2.8.2))(rollup@4.54.0)(sass@1.97.1)(terser@5.44.1)(vue@3.5.26)(yaml@2.8.2)
       '@unhead/vue': 2.1.1(vue@3.5.26)
       '@vue/shared': 3.5.26
       c12: 3.3.3(magicast@0.5.1)
@@ -7425,6 +7449,8 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
+  strnum@2.1.2: {}
+
   structured-clone-es@1.0.0: {}
 
   stylehacks@7.0.7(postcss@8.5.6):
@@ -7801,6 +7827,15 @@ snapshots:
   wsl-utils@0.1.0:
     dependencies:
       is-wsl: 3.1.0
+
+  xml2js@0.6.2:
+    dependencies:
+      sax: 1.4.3
+      xmlbuilder: 11.0.1
+    optional: true
+
+  xmlbuilder@11.0.1:
+    optional: true
 
   y18n@5.0.8: {}
 

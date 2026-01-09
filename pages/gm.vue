@@ -57,6 +57,8 @@
               </v-card-text>
 
               <v-card-actions>
+                <v-btn size="small" color="warning" variant="flat" prepend-icon="mdi-gift"
+                  @click="openSendItemDialog(character)">发送物品</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn size="small" prepend-icon="mdi-tshirt-crew"
                   :append-icon="`${character?.equipmentExpand ? 'mdi-arrow-up' : 'mdi-arrow-down'}`"
@@ -86,6 +88,28 @@
           color="primary"></v-pagination>
       </v-sheet>
     </v-container>
+    <v-dialog v-model="sendItemsDialog" transition="dialog-top-transition" max-width="500" persistent>
+      <v-card>
+        <v-card-title class="d-flex justify-space-between align-center">
+          <div class="text-h5 text-medium-emphasis ps-2">
+            发送物品给：{{ sendItemTarget?.characterName }}
+          </div>
+          <v-btn icon="mdi-close" variant="text" @click="sendItemsDialog = false"></v-btn>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field label="标题" v-model="sendItemTarget.title" variant="solo"></v-text-field>
+          <v-textarea label="内容" v-model="sendItemTarget.content" variant="solo"></v-textarea>
+          <v-text-field label="物品：id1:cnt1 id2:cnt2..." v-model="sendItemTarget.itemList" variant="solo"></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn @click="executeSendItems()" color="success" variant="flat">
+            发送
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-main>
 </template>
 <script setup lang="ts">
@@ -99,6 +123,13 @@ const pageCount = ref(0)
 const currentPage = ref(1)
 const nameQuery = ref('')
 const onlineStat = ref(true)
+const sendItemsDialog = ref(false)
+const sendItemTarget = ref({
+  characterName: '',
+  title: '',
+  content: '',
+  itemList: ''
+})
 onMounted(async () => {
   if (!await userStore.loadAuthUser()) {
     return navigateTo('/login')
@@ -125,7 +156,7 @@ function loadCharacters() {
       loadCharacters()
       return;
     }
-    pageCount.value = pageCountVal; 
+    pageCount.value = pageCountVal;
     for (const element of charactersResp) {
       element.equipmentExpand = false;
     }
@@ -140,6 +171,24 @@ function expandCharacterEquipments(character: any) {
   axios.get(`/api/gm/character/${character.guid}/equipments`).then((response) => {
     character.equipments = response.data.result.equipments
     character.equipmentExpand = true;
+  })
+}
+
+function openSendItemDialog(character: any) {
+  sendItemTarget.value.characterName = character.name;
+  sendItemTarget.value.itemList = '';
+  sendItemTarget.value.title = '';
+  sendItemTarget.value.content = '';
+  sendItemsDialog.value = true;
+}
+
+function executeSendItems() {
+  axios.post(`/api/gm/sendItems`, sendItemTarget.value).then((response) => {
+    if (response.data.success) {
+      sendItemsDialog.value = false;
+    } else {
+      alert(response.data.errorMessage);
+    }
   })
 }
 </script>
