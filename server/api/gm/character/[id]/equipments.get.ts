@@ -1,6 +1,6 @@
 
-import { characters, itemTemplate, itemTemplateLocale } from '../../../db/schema';
-import { charactersDb, worldDb } from '../../../db/connections';
+import { characters, itemTemplate, itemTemplateLocale } from '../../../../db/schema';
+import { charactersDb, worldDb } from '../../../../db/connections';
 
 import { eq, and, inArray } from 'drizzle-orm';
 export default defineEventHandler(async (event) => {
@@ -9,10 +9,8 @@ export default defineEventHandler(async (event) => {
     if (Number.isNaN(characterId) || characterId <= 0) {
         return failure("角色UD非法", 401);
     }
-    console.log('Fetching character equriments:', characterId, 'and user ID:', authUser?.id);
     let characterList = await charactersDb.select().from(characters).where(
         and(
-            eq(characters.account, authUser?.id),
             eq(characters.guid, characterId)
         )
     );

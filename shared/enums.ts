@@ -143,8 +143,10 @@ export const ItemQualityColorMap: Map<ItemQuality, string> = new Map([
 
 export const ItemEquipmentPosition: Map<number, string> = new Map([
     [0, "头部"],
+    [1, "未知"],
     [2, "颈部"],
     [4, "肩部"],
+    [5, "染料"],
     [6, "衬衫"],
     [8, "身体"],
     [10, "腰部"],
@@ -166,3 +168,34 @@ export const ItemEquipmentPosition: Map<number, string> = new Map([
     [42, "背包#3"],
     [44, "背包#4"],
 ])
+
+export function itemEquipmentPositionName(position: number): string {
+    switch (position) {
+        case 0: return "头部";
+        case 1: return "未知";
+        case 2: return "颈部";
+        case 4: return "肩部";
+        case 5: return "染料";
+        case 6: return "衬衫";
+        case 8: return "身体";
+        case 10: return "腰部";
+        case 12: return "腿部";
+        case 14: return "脚部";
+        case 16: return "手腕";
+        case 18: return "手部";
+        case 20: return "戒指#1";
+        case 22: return "戒指#2";
+        case 24: return "饰品#1";
+        case 26: return "饰品#2";
+        case 28: return "背部";
+        case 30: return "主手";
+        case 32: return "副手";
+        case 34: return "远程";
+        case 36: return "战袍";
+        case 38: return "背包#1";
+        case 40: return "背包#2";
+        case 42: return "背包#3";
+        case 44: return "背包#4";
+        default: return "未知部位";
+    }
+}

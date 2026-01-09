@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     }
     try {
         const verify = jwt.verify(token, Buffer.from(user.salt).toString('hex'), { algorithm: ['HS256'] });
-        event.context.authUser = verify;
+        event.context.authUser = user;
     } catch (e) {
         if (e instanceof jwt.JsonWebTokenError) {
             return failure("认证失败", 401);
@@ -37,4 +37,11 @@ export default defineEventHandler(async (event) => {
             return failure("系统繁忙", 500);
         }
     }
+
+    if (event.path.startsWith('/api/gm/')) {
+        if (!(user.Flags & 1)) {
+            return failure("权限不足", 401);
+        }
+    }
+
 })

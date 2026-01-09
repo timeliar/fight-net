@@ -4,7 +4,6 @@ const config = useRuntimeConfig();
 import { eq, and } from 'drizzle-orm';
 export default defineEventHandler(async (event) => {
     const authUser = event.context.authUser;
-    console.log("Fetching realms for user:", authUser);
     const realms = await authDb.select().from(realmlist);
     const resRealms = realms.map(async realm => {
         const numChars = await authDb.select()
