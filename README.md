@@ -43,6 +43,12 @@ NUXT_REALM_RATE_ITEM_EPIC="5"
 NUXT_REALM_RATE_ITEM_LENENDARY="5"
 NUXT_REALM_RATE_DROP_MONEY="100"
 ```
+## 页面示例
+<img width="2177" height="1254" alt="image" src="https://github.com/user-attachments/assets/1d91f300-56e5-465a-8adb-87e6f8696cee" />
+<img width="2177" height="1254" alt="image" src="https://github.com/user-attachments/assets/f272b552-1c0e-4b7f-90de-a976c63e10f9" />
+<img width="2177" height="1254" alt="image" src="https://github.com/user-attachments/assets/107f1116-94f2-4303-8a7f-afb9bc5bd2fe" />
+<img width="2177" height="1254" alt="image" src="https://github.com/user-attachments/assets/1c469bc3-cbc3-4cb6-8c5a-66c56ccbf26c" />
+<img width="2177" height="1254" alt="image" src="https://github.com/user-attachments/assets/b1b41477-2be4-47ed-aa50-b1f2e70cb67f" />
 
 ## 功能
 - [x] 简易注册
