@@ -9,6 +9,13 @@ docker build . -t fight-net:dev
 
 `docker compose up -d` 运行
 
+## 使用现有镜像
+`docker pull timeliar/fight-net`
+
+docker-compose.yml 内的`fight-net:dev`改成`timeliar/fight-net`
+
+`docker compose up -d` 运行
+
 ## 配置项
 
 `.env`文件主要内容
