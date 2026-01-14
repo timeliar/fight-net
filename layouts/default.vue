@@ -75,13 +75,16 @@
             <v-container fluid>
                 <slot />
             </v-container>
+            <v-snackbar-queue v-model="messagesStore.queue"></v-snackbar-queue>
         </v-main>
     </v-layout>
 </template>
 <script setup lang="ts">
 import { useUserStore } from "~/store/client_auth"
+import { useMessagesStore } from "~/store/message_queue"
 import { Expansion, Locale } from "~/shared/enums"
 const userStore = useUserStore()
+const messagesStore = useMessagesStore()
 async function logout() {
     userStore.logout()
     await navigateTo('/login')

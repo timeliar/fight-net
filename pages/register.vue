@@ -22,24 +22,15 @@
             </v-card>
         </v-sheet>
     </v-main>
-    <v-dialog v-model="dialog" transition="dialog-top-transition" width="auto">
-        <v-card>
-            <v-card-text>
-                {{ dialogText }}
-            </v-card-text>
-            <template v-slot:actions>
-                <v-btn class="ms-auto" color="success" v-show="successBtn" text="成功" to="/login"></v-btn>
-                <v-btn class="ms-auto" color="error" v-show="failedBtn" text="失败" @click="dialog = false"></v-btn>
-            </template>
-        </v-card>
-    </v-dialog>
 </template>
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
 import { registerAccount } from '@/shared/validation.ts'
 import { z } from 'zod';
+import { useMessagesStore } from "~/store/message_queue"
 
+const messagesStore = useMessagesStore()
 const loading = ref(false)
 const username = ref('')
 const usernameError = ref([])
@@ -48,10 +39,6 @@ const passwordError = ref([])
 const email = ref('')
 const emailError = ref([])
 const visible = ref(false)
-const dialog = ref(false)
-const successBtn = ref(false)
-const failedBtn = ref(false)
-const dialogText = ref('')
 
 async function submit(event) {
     loading.value = true
@@ -69,20 +56,13 @@ async function submit(event) {
     }
     axios.post('/api/register', parseResult.data).then((response) => {
         loading.value = false
-        dialog.value = true
         if (response.data.success) {
-            successBtn.value = true
-            failedBtn.value = false
-            dialogText.value = "注册成功"
+            messagesStore.success("注册成功")
         } else {
-            successBtn.value = false
-            failedBtn.value = true
-            dialogText.value = response.data.errorMessage || "注册失败"
+            messagesStore.error(response.data.errorMessage || "注册失败")
         }
     }).catch((error) => {
-        loading.value = false
-        dialogText.value = "注册失败"
-        dialog.value = true
+        messagesStore.error("注册异常")
     });
     loading.value = false
 }

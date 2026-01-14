@@ -62,7 +62,9 @@
 
               <v-card-actions>
                 <v-btn size="small" color="warning" variant="flat" prepend-icon="mdi-gift"
-                  @click="openSendItemDialog(character)">发送物品</v-btn>
+                  @click="openSendItemDialog(character)">发福利</v-btn>
+                <v-btn size="small" color="warning" variant="flat" prepend-icon="mdi-currency-usd"
+                  @click="openSendMoneyDialog(character)">打钱</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn size="small" prepend-icon="mdi-tshirt-crew"
                   :append-icon="`${character?.equipmentExpand ? 'mdi-arrow-up' : 'mdi-arrow-down'}`"
@@ -114,13 +116,38 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="sendMoneyDialog" transition="dialog-top-transition" max-width="500" persistent>
+      <v-card>
+        <v-card-title class="d-flex justify-space-between align-center">
+          <div class="text-h5 text-medium-emphasis ps-2">
+            发送金钱给：{{ sendMoneyTarget?.characterName }}
+          </div>
+          <v-btn icon="mdi-close" variant="text" @click="sendMoneyDialog = false"></v-btn>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field label="标题" v-model="sendMoneyTarget.title" variant="solo"></v-text-field>
+          <v-textarea label="内容" v-model="sendMoneyTarget.content" variant="solo"></v-textarea>
+          <v-number-input label="数量（铜）" v-model="sendMoneyTarget.count" :min="1" control-variant="split"
+            variant="solo"></v-number-input>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn @click="executeSendMoney()" color="success" variant="flat">
+            发送
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-main>
 </template>
 <script setup lang="ts">
 import { Gender, Expansion, Locale, CharClass, Race, getCharClassIcon, getRaceIcon, RealmIcon, RealmTimezone, ItemQualityColorMap, itemEquipmentPositionName } from "~/shared/enums"
 import axios from 'axios';
 import { useUserStore } from "~/store/client_auth"
+import { useMessagesStore } from "~/store/message_queue"
 const userStore = useUserStore()
+const messagesStore = useMessagesStore()
 const characters = ref([])
 const pageSize = ref(50)
 const pageCount = ref(0)
@@ -134,6 +161,13 @@ const sendItemTarget = ref({
   title: '',
   content: '',
   itemList: ''
+})
+const sendMoneyDialog = ref(false)
+const sendMoneyTarget = ref({
+  characterName: '',
+  title: '',
+  content: '',
+  count: 1
 })
 onMounted(async () => {
   if (!await userStore.loadAuthUser()) {
@@ -187,13 +221,31 @@ function openSendItemDialog(character: any) {
   sendItemTarget.value.content = '';
   sendItemsDialog.value = true;
 }
+function openSendMoneyDialog(character: any) {
+  sendMoneyTarget.value.characterName = character.name;
+  sendMoneyTarget.value.count = 1;
+  sendMoneyTarget.value.title = '';
+  sendMoneyTarget.value.content = '';
+  sendMoneyDialog.value = true;
+}
 
 function executeSendItems() {
   axios.post(`/api/gm/sendItems`, sendItemTarget.value).then((response) => {
     if (response.data.success) {
+      messagesStore.success("物品发送成功")
       sendItemsDialog.value = false;
     } else {
-      alert(response.data.errorMessage);
+      messagesStore.error(response.data.errorMessage);
+    }
+  })
+}
+function executeSendMoney() {
+  axios.post(`/api/gm/sendMoney`, sendMoneyTarget.value).then((response) => {
+    if (response.data.success) {
+      messagesStore.success("金钱发送成功")
+      sendMoneyDialog.value = false;
+    } else {
+      messagesStore.error(response.data.errorMessage);
     }
   })
 }

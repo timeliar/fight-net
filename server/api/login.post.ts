@@ -15,15 +15,15 @@ export default defineEventHandler(async (event) => {
     const username = parseResult.data.username as string;
     const users = await authDb.select().from(account).where(eq(account.username, username));
     if (users.length <= 0) {
-        return failure("登录失败", 401);
+        return failure("账号不存在", 401);
     }
     const user = users[0];
     if (!user) {
-        return failure("登录失败", 401);
+        return failure("账号不存在", 401);
     }
     const verifier = calculateSRP6Verifier(user.username as string, password, user.salt as unknown as Buffer);
     if (Buffer.compare(verifier, user.verifier as unknown as Buffer) !== 0) {
-        return failure("登陆失败", 401);
+        return failure("密码错误", 401);
     }
     const loginUser = {
         id: user.id,

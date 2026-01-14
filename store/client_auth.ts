@@ -4,6 +4,7 @@ export const useUserStore = defineStore('user', {
     state: () => ({
         userInfo: null as any,
         accessToken: null as string | null,
+        messages: [] as Array<string>,
     }),
     actions: {
         login(token: string) {

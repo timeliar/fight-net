@@ -19,16 +19,6 @@
             </v-card>
         </v-sheet>
     </v-main>
-    <v-dialog v-model="dialog" transition="dialog-top-transition" width="auto">
-        <v-card>
-            <v-card-text>
-                {{ dialogText }}
-            </v-card-text>
-            <template v-slot:actions>
-                <v-btn class="ms-auto" color="error" v-show="failedBtn" text="失败" @click="dialog = false"></v-btn>
-            </template>
-        </v-card>
-    </v-dialog>
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -36,16 +26,15 @@ import axios from 'axios';
 import { loginAccount } from '@/shared/validation.ts'
 import { z } from 'zod';
 import { useUserStore } from "~/store/client_auth"
+import { useMessagesStore } from "~/store/message_queue"
 const userStore = useUserStore()
+const messagesStore = useMessagesStore()
 
 const loading = ref(false)
 const username = ref('')
 const usernameError = ref([])
 const password = ref('')
 const passwordError = ref([])
-const dialog = ref(false)
-const failedBtn = ref(false)
-const dialogText = ref('')
 const visible = ref(false)
 
 async function submit(event) {
@@ -65,16 +54,13 @@ async function submit(event) {
         loading.value = false
         if (response.data.success) {
             await userStore.login(response.data.result.token)
+            messagesStore.success("登录成功")
             navigateTo('/')
         } else {
-            failedBtn.value = true
-            dialogText.value = response.data.message || "登录失败"
-            dialog.value = true
+            messagesStore.error(response.data.errorMessage || "登录失败")
         }
     }).catch((error) => {
-        loading.value = false
-        dialogText.value = "登录异常"
-        failedBtn.value = true
+        messagesStore.error("登录异常")
     });
 }
 </script>
