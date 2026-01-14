@@ -40,125 +40,121 @@
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
-  <v-main class="d-flex align-center justify-center">
-    <v-container>
-      <v-sheet width="100%">
-        <v-card variant="flat">
-          <v-card-title primary-title>
-            服务器列表
-          </v-card-title>
-          <v-card-text>
-            <v-row>
-              <v-col v-for="(realm, i) in realms" :key="i" cols="12" md="4" sm="12">
-                <v-card max-width="400" color="blue-grey-lighten-5">
-                  <v-card-title primary-title>
-                    {{ realm?.name }}
-                  </v-card-title>
-                  <v-card-subtitle>
-                    客户端 <code>WTF/Config.wtf</code> 配置如下： <br>
-                    <v-chip label>
-                      SET realmlist "{{ realm?.address }}"
-                    </v-chip>
-                  </v-card-subtitle>
-                  <v-card-text>
-                    地址：{{ realm?.address }} <br>
-                    端口：{{ realm?.port }} <br>
-                    版本：{{ realm?.gamebuild }} <br>
-                    时区：{{ RealmTimezone[realm?.timezone] }} <br>
-                    类型：<v-chip color="warning" size="x-small">{{ RealmIcon[realm?.icon] }}</v-chip>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-chip size="small" dark color="success">
-                      角色数：{{ realm?.numCharacters }}
-                    </v-chip>
-                    <v-btn rounded size="small" dark color="blue" class="ml-3" prepend-icon="mdi-currency-usd"
-                      @click="showRealmRates(realm?.rates)">
-                      倍率
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-sheet>
-      <v-sheet class="mt-2">
-        <v-card variant="flat">
-          <v-card-title primary-title>
-            角色列表
-          </v-card-title>
-          <v-card-text>
-            <v-row>
-              <v-col v-for="character in realmCharacters" :key="character?.guid" cols="12" lg="4" md="6" sm="12">
-                <v-card>
-                  <v-card-title class="d-flex align-center">
-                    <v-avatar color="grey">
-                      <v-img :src="getCharClassIcon(character?.class)" cover></v-img>
-                    </v-avatar>
-                    <v-avatar color="grey" class="ml-2">
-                      <v-img :src="getRaceIcon(character?.race, character?.gender)" cover></v-img>
-                    </v-avatar>
-                    <v-btn :color="character?.online ? 'green' : 'grey'" class="ml-3 text-none"
-                      :prepend-icon="character?.online ? 'mdi-wifi' : 'mdi-wifi-off'">
-                      {{ character?.name }}
-                    </v-btn>
-                  </v-card-title>
-                  <v-card-subtitle>
-                    <v-chip size="small" color="blue" class="ml-3">
-                      Lv.{{ character?.level }}
-                    </v-chip>
-                    <v-chip size="small" :color="character.playerFlags & 16 ? 'grey' : 'green'" class="ml-3">
-                      {{ character?.playerFlags & 16 ? '死了' : '活着' }}
-                    </v-chip>
-                  </v-card-subtitle>
-                  <v-card-text>
-                    <v-list>
-                      <v-list-item>升到下一级所需经验：{{ character?.xp }}</v-list-item>
-                      <v-list-item>金钱：
-                        <v-chip size="small" color="yellow-accent-4" variant="flat">{{ character?.money.gold
-                        }}金</v-chip>
-                        <v-chip size="small" class="ml-1" color="blue-grey-lighten-2" variant="flat">{{
-                          character?.money.silver
-                        }}银</v-chip>
-                        <v-chip size="small" class="ml-1" color="brown-darken-1" variant="flat">{{
-                          character?.money.copper
-                        }}铜</v-chip>
-                      </v-list-item>
-                    </v-list>
-                  </v-card-text>
+  <v-sheet width="100%">
+    <v-card variant="flat">
+      <v-card-title primary-title>
+        服务器列表
+      </v-card-title>
+      <v-card-text>
+        <v-row>
+          <v-col v-for="(realm, i) in realms" :key="i" cols="12" md="4" sm="12">
+            <v-card max-width="400" color="blue-grey-lighten-5">
+              <v-card-title primary-title>
+                {{ realm?.name }}
+              </v-card-title>
+              <v-card-subtitle>
+                客户端 <code>WTF/Config.wtf</code> 配置如下： <br>
+                <v-chip label>
+                  SET realmlist "{{ realm?.address }}"
+                </v-chip>
+              </v-card-subtitle>
+              <v-card-text>
+                地址：{{ realm?.address }} <br>
+                端口：{{ realm?.port }} <br>
+                版本：{{ realm?.gamebuild }} <br>
+                时区：{{ RealmTimezone[realm?.timezone] }} <br>
+                类型：<v-chip color="warning" size="x-small">{{ RealmIcon[realm?.icon] }}</v-chip>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-chip size="small" dark color="success">
+                  角色数：{{ realm?.numCharacters }}
+                </v-chip>
+                <v-btn rounded size="small" dark color="blue" class="ml-3" prepend-icon="mdi-currency-usd"
+                  @click="showRealmRates(realm?.rates)">
+                  倍率
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+  </v-sheet>
+  <v-sheet>
+    <v-card variant="flat">
+      <v-card-title primary-title>
+        角色列表
+      </v-card-title>
+      <v-card-text>
+        <v-row>
+          <v-col v-for="character in realmCharacters" :key="character?.guid" cols="12" lg="4" md="6" sm="12">
+            <v-card>
+              <v-card-title class="d-flex align-center">
+                <v-avatar color="grey">
+                  <v-img :src="getCharClassIcon(character?.class)" cover></v-img>
+                </v-avatar>
+                <v-avatar color="grey" class="ml-2">
+                  <v-img :src="getRaceIcon(character?.race, character?.gender)" cover></v-img>
+                </v-avatar>
+                <v-btn :color="character?.online ? 'green' : 'grey'" class="ml-3 text-none"
+                  :prepend-icon="character?.online ? 'mdi-wifi' : 'mdi-wifi-off'">
+                  {{ character?.name }}
+                </v-btn>
+              </v-card-title>
+              <v-card-subtitle>
+                <v-chip size="small" color="blue" class="ml-3">
+                  Lv.{{ character?.level }}
+                </v-chip>
+                <v-chip size="small" :color="character.playerFlags & 16 ? 'grey' : 'green'" class="ml-3">
+                  {{ character?.playerFlags & 16 ? '死了' : '活着' }}
+                </v-chip>
+              </v-card-subtitle>
+              <v-card-text>
+                <v-list>
+                  <v-list-item>升到下一级所需经验：{{ character?.xp }}</v-list-item>
+                  <v-list-item>金钱：
+                    <v-chip size="small" color="yellow-accent-4" variant="flat">{{ character?.money.gold
+                    }}金</v-chip>
+                    <v-chip size="small" class="ml-1" color="blue-grey-lighten-2" variant="flat">{{
+                      character?.money.silver
+                    }}银</v-chip>
+                    <v-chip size="small" class="ml-1" color="brown-darken-1" variant="flat">{{
+                      character?.money.copper
+                    }}铜</v-chip>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
 
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn size="small" prepend-icon="mdi-tshirt-crew"
-                      :append-icon="character?.equipmentExpand ? 'mdi-arrow-up' : 'mdi-arrow-down'"
-                      @click="expandCharacterEquipments(character)">
-                      角色装备
-                    </v-btn>
-                  </v-card-actions>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn size="small" prepend-icon="mdi-tshirt-crew"
+                  :append-icon="character?.equipmentExpand ? 'mdi-arrow-up' : 'mdi-arrow-down'"
+                  @click="expandCharacterEquipments(character)">
+                  角色装备
+                </v-btn>
+              </v-card-actions>
 
-                  <v-divider></v-divider>
+              <v-divider></v-divider>
 
-                  <v-expand-transition>
-                    <div v-if="character?.equipmentExpand">
-                      <v-list :lines="false" density="compact">
-                        <v-list-item v-for="(equipment, idx) in character?.equipments" :key="idx">
-                          <v-btn>{{ itemEquipmentPositionName(equipment.index) }}</v-btn>
-                          <v-chip class="ml-2" :color="ItemQualityColorMap.get(equipment.quality)" variant="flat">
-                            {{ equipment.zhCNName }}
-                          </v-chip>
-                        </v-list-item>
-                      </v-list>
-                    </div>
-                  </v-expand-transition>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-sheet>
-    </v-container>
-  </v-main>
+              <v-expand-transition>
+                <div v-if="character?.equipmentExpand">
+                  <v-list :lines="false" density="compact">
+                    <v-list-item v-for="(equipment, idx) in character?.equipments" :key="idx">
+                      <v-btn>{{ itemEquipmentPositionName(equipment.index) }}</v-btn>
+                      <v-chip class="ml-2" :color="ItemQualityColorMap.get(equipment.quality)" variant="flat">
+                        {{ equipment.zhCNName }}
+                      </v-chip>
+                    </v-list-item>
+                  </v-list>
+                </div>
+              </v-expand-transition>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+  </v-sheet>
   <v-dialog v-model="realmRatesDialog" width="auto">
     <v-card prepend-icon="mdi-currency-usd" title="倍率">
       <v-card-text>

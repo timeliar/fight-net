@@ -71,7 +71,11 @@
             </v-menu>
         </v-app-bar>
         <!-- Main -->
-        <slot />
+        <v-main>
+            <v-container fluid>
+                <slot />
+            </v-container>
+        </v-main>
     </v-layout>
 </template>
 <script setup lang="ts">
