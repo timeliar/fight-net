@@ -30,6 +30,8 @@ export default defineNuxtConfig({
     realmRateItemEpic: 1,
     realmRateItemLenendary: 1,
     realmRateDropMoney: 1,
+    clientDownloadLink: '',
+    clientInfo: '',
   },
   modules: [
     '@pinia/nuxt',

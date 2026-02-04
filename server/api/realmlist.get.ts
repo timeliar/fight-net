@@ -46,7 +46,9 @@ export default defineEventHandler(async (event) => {
             population: realm.population,
             gamebuild: realm.gamebuild,
             numCharacters: num,
-            rates: rates
+            rates: rates,
+            clientLink: config.clientDownloadLink,
+            clientInfo: config.clientInfo
         }
     });
     const resRealmsAwait = await Promise.all(resRealms);

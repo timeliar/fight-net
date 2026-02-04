@@ -63,7 +63,8 @@
                 端口：{{ realm?.port }} <br>
                 版本：{{ realm?.gamebuild }} <br>
                 时区：{{ RealmTimezone[realm?.timezone] }} <br>
-                类型：<v-chip color="warning" size="x-small">{{ RealmIcon[realm?.icon] }}</v-chip>
+                类型：<v-chip color="warning" size="x-small">{{ RealmIcon[realm?.icon] }}</v-chip> <br>
+                客户端：<a :href="realm?.clientLink" target="_blank">{{realm?.clientInfo}}</a> <br>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
